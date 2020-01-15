@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { async } from 'q';
+import { adminLogin } from '../api/user';
 export default {
   data() {
     return {
@@ -51,7 +51,8 @@ export default {
     async login() {
       this.$refs.loginFormRef.validate(async valid  => {
         if (!valid) return;
-        const res = await this.$http.post('login', this.loginForm);
+        // const res = await this.$http.post('login', this.loginForm);
+        const res = await adminLogin(this.loginForm);
         // console.log(res);
         localStorage.token = res.data.data.token;
         this.$router.push('/');
